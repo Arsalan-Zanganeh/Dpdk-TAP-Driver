@@ -48,7 +48,6 @@ This project is designed to analyze network performance using DPDK (testpmd), vi
 
 ```shell
 echo 1024 > /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
-mkdir /mnt/huge
 mount -t hugetlbfs pagesize=1GB /mnt/huge
 ```
 
@@ -59,7 +58,7 @@ mount -t hugetlbfs pagesize=1GB /mnt/huge
 In the directory cd dpdk-<version>/build, run testpmd as follows:
 
 ```shell
- sudo LD_PRELOAD=/usr/lib/x86_64-linux-gnu/liblttng-ust-cyg-profile.so ./app/dpdk-testpmd -l 0-1 --proc-type=primary --file-prefix=pmd1 --vdev=net_memif,role=server -- -i
+sudo LD_PRELOAD=/usr/lib/x86_64-linux-gnu/liblttng-ust-cyg-profile.so ./app/dpdk-testpmd -l 4-7 -n 2 --vdev=net_tap0,iface=tap0 --vdev=net_tap1,iface=tap1 -- -i
  ```
  What this does:
 
